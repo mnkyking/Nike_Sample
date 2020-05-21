@@ -15,6 +15,8 @@
 		00E3E5B62474BAEE000578A4 /* Nike_TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5B52474BAEE000578A4 /* Nike_TestUITests.swift */; };
 		00E3E5C42474BE47000578A4 /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5C32474BE47000578A4 /* AlbumListViewController.swift */; };
 		00E3E5C62474D2B1000578A4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 00E3E5C52474D2B1000578A4 /* README.md */; };
+		00E3E5CC2474F027000578A4 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5CB2474F027000578A4 /* Album.swift */; };
+		00E3E5CE2475DF10000578A4 /* AlbumListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5CD2475DF10000578A4 /* AlbumListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		00E3E5B72474BAEE000578A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E3E5C32474BE47000578A4 /* AlbumListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewController.swift; sourceTree = "<group>"; };
 		00E3E5C52474D2B1000578A4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		00E3E5CB2474F027000578A4 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		00E3E5CD2475DF10000578A4 /* AlbumListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 		00E3E5C72474DF74000578A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				00E3E5CB2474F027000578A4 /* Album.swift */,
+				00E3E5CD2475DF10000578A4 /* AlbumListTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,6 +300,8 @@
 				00E3E5942474BAED000578A4 /* AppDelegate.swift in Sources */,
 				00E3E5C42474BE47000578A4 /* AlbumListViewController.swift in Sources */,
 				00E3E5962474BAED000578A4 /* SceneDelegate.swift in Sources */,
+				00E3E5CC2474F027000578A4 /* Album.swift in Sources */,
+				00E3E5CE2475DF10000578A4 /* AlbumListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
