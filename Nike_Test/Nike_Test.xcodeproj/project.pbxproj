@@ -17,6 +17,7 @@
 		00E3E5C62474D2B1000578A4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 00E3E5C52474D2B1000578A4 /* README.md */; };
 		00E3E5CC2474F027000578A4 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5CB2474F027000578A4 /* Album.swift */; };
 		00E3E5CE2475DF10000578A4 /* AlbumListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5CD2475DF10000578A4 /* AlbumListTableViewCell.swift */; };
+		00E3E5D124763554000578A4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5D024763554000578A4 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		00E3E5C52474D2B1000578A4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		00E3E5CB2474F027000578A4 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		00E3E5CD2475DF10000578A4 /* AlbumListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListTableViewCell.swift; sourceTree = "<group>"; };
+		00E3E5D024763554000578A4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		00E3E5922474BAED000578A4 /* Nike_Test */ = {
 			isa = PBXGroup;
 			children = (
+				00E3E5CF24763516000578A4 /* Services */,
 				00E3E5CA2474DFA7000578A4 /* Resources */,
 				00E3E5C92474DF87000578A4 /* View */,
 				00E3E5C82474DF7C000578A4 /* ViewModel */,
@@ -164,6 +167,14 @@
 				00E3E59C2474BAEE000578A4 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		00E3E5CF24763516000578A4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				00E3E5D024763554000578A4 /* NetworkService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 				00E3E5C42474BE47000578A4 /* AlbumListViewController.swift in Sources */,
 				00E3E5962474BAED000578A4 /* SceneDelegate.swift in Sources */,
 				00E3E5CC2474F027000578A4 /* Album.swift in Sources */,
+				00E3E5D124763554000578A4 /* NetworkService.swift in Sources */,
 				00E3E5CE2475DF10000578A4 /* AlbumListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

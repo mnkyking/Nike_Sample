@@ -12,14 +12,21 @@ class AlbumListViewController: UIViewController {
 
     let albumTableView = UITableView()
     let albumCellId = "albumListCell"
+    var albumList: [Album]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        let networkService = NetworkService()
+        networkService.startRequest()
         setupUI()
     }
     
     func setupUI() {
+        albumList = [Album(albumTitle: "title", artist: "artist", albumArt: "art")]
+        for n in 1...10 {
+            albumList?.append(Album(albumTitle: "title: \(n)", artist: "artist: \(n)", albumArt: "art \(n)"))
+        }
         albumTableView.delegate = self
         albumTableView.dataSource = self
         albumTableView.backgroundColor = .darkGray
@@ -39,7 +46,7 @@ class AlbumListViewController: UIViewController {
 
 extension AlbumListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return albumList?.count ?? 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,9 +56,8 @@ extension AlbumListViewController: UITableViewDataSource {
             defaultCell.textLabel?.text = String("text \(indexPath.row)")
             return defaultCell
         }
-        cell.albumName?.text = String("album Name: \(indexPath.row)")
-        cell.artistName?.text = String("artist Name: \(indexPath.row)")
-        //cell.albumThumbnail?.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
+        cell.albumName?.text = albumList?[indexPath.row].albumTitle
+        cell.artistName?.text = albumList?[indexPath.row].artist
         return cell
     }
 }
