@@ -15,7 +15,7 @@ struct NetworkService {
         //let url = URL(string: "https://learnappmaking.com/ex/users.json")!
         let feedType: String = "top-albums"
         let genre: String = "all"
-        let resultsLimit: String = "10"
+        let resultsLimit: String = "5"
         let allowExplicit: String = true ? "explicit" : "non-explicit"
         let format: String = "json"
         let url = URL(string: "https://rss.itunes.apple.com/api/v1/us/apple-music/\(feedType)/\(genre)/\(resultsLimit)/\(allowExplicit).\(format)")!

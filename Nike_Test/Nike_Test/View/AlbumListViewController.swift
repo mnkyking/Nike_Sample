@@ -23,10 +23,6 @@ class AlbumListViewController: UIViewController {
     }
     
     func setupUI() {
-        albumList = [Album(albumTitle: "title", artist: "artist", albumArt: "art")]
-        for n in 1...10 {
-            albumList?.append(Album(albumTitle: "title: \(n)", artist: "artist: \(n)", albumArt: "art \(n)"))
-        }
         albumTableView.delegate = self
         albumTableView.dataSource = self
         albumTableView.backgroundColor = .darkGray
@@ -44,6 +40,7 @@ class AlbumListViewController: UIViewController {
     }
 }
 
+// MARK: Table View Data Source
 extension AlbumListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return albumList?.count ?? 1
@@ -56,12 +53,13 @@ extension AlbumListViewController: UITableViewDataSource {
             defaultCell.textLabel?.text = String("text \(indexPath.row)")
             return defaultCell
         }
-        cell.albumName?.text = albumList?[indexPath.row].albumTitle
-        cell.artistName?.text = albumList?[indexPath.row].artist
+        //cell.albumName?.text = albumList?[indexPath.row].albumTitle
+        //cell.artistName?.text = albumList?[indexPath.row].artist
         return cell
     }
 }
 
+// MARK: Table View Delegate
 extension AlbumListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         /*
