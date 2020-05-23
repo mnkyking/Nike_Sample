@@ -10,35 +10,35 @@ import Foundation
 
 struct NetworkService {
     
-    func startRequest() {
+    func requestAlbumList(albumList: @escaping ([Album])->()) {
         let session = URLSession.shared
         //let url = URL(string: "https://learnappmaking.com/ex/users.json")!
         let feedType: String = "top-albums"
         let genre: String = "all"
-        let resultsLimit: String = "5"
+        let resultsLimit: String = "100"
         let allowExplicit: String = true ? "explicit" : "non-explicit"
         let format: String = "json"
         let url = URL(string: "https://rss.itunes.apple.com/api/v1/us/apple-music/\(feedType)/\(genre)/\(resultsLimit)/\(allowExplicit).\(format)")!
         
         let task = session.dataTask(with: url, completionHandler: { data, response, error in
-            if error != nil || data == nil {
+            if error != nil {
                 print("Client error!")
                 return
             }
-
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                print("Server error!")
-                return
-            }
-
-            guard let mime = response.mimeType, mime == "application/json" else {
-                print("Wrong MIME type!")
-                return
-            }
+            
+            guard let data = data else { return }
 
             do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                print(json)
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let json = try decoder.decode(RSSFeed.self, from: data)
+                if let albums = json.feed?.results {
+                    print(albums)
+                    albumList(albums)
+                }
+                
             } catch {
                 print("JSON error: \(error.localizedDescription)")
             }

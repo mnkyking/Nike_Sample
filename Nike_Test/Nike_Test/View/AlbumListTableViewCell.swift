@@ -11,14 +11,13 @@ import UIKit
 Each cell should display the name of the album, the artist, and the album art (thumbnail image).
 */
 class AlbumListTableViewCell: UITableViewCell {
-    var albumName: UILabel?
-    var artistName: UILabel?
+    var albumName: AlbumListLabel?
+    var artistName: AlbumListLabel?
     var albumThumbnail: UIImageView?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        self.backgroundColor = .lightGray
     }
     
     required init?(coder: NSCoder) {
@@ -33,13 +32,12 @@ class AlbumListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    // MARK: UI
     func setupUI() {
-        albumName = UILabel()
-        artistName = UILabel()
+        albumName = AlbumListLabel()
+        artistName = AlbumListLabel()
         albumThumbnail = UIImageView()
         if let albumName = albumName, let artistName = artistName, let albumThumbnail = albumThumbnail {
-            albumName.textColor = .red
-            artistName.textColor = .green
             albumThumbnail.backgroundColor = .orange
             contentView.addSubview(albumName)
             contentView.addSubview(artistName)

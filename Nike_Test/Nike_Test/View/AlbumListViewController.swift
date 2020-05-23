@@ -11,6 +11,7 @@ import UIKit
 class AlbumListViewController: UIViewController {
 
     let albumTableView = UITableView()
+    let loadingIndicator = UIActivityIndicatorView()
     let albumCellId = "albumListCell"
     var albumList: [Album]?
     
@@ -18,14 +19,22 @@ class AlbumListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         let networkService = NetworkService()
-        networkService.startRequest()
+        networkService.requestAlbumList { list in
+            self.albumList = list
+            DispatchQueue.main.async {
+                self.albumTableView.isHidden = false
+                self.albumTableView.reloadData()
+                self.loadingIndicator.stopAnimating()
+            }
+        }
         setupUI()
     }
     
     func setupUI() {
         albumTableView.delegate = self
         albumTableView.dataSource = self
-        albumTableView.backgroundColor = .darkGray
+        albumTableView.isHidden = true
+        albumTableView.backgroundColor = .white
         albumTableView.register(AlbumListTableViewCell.self, forCellReuseIdentifier: albumCellId)
         albumTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(albumTableView)
@@ -33,17 +42,27 @@ class AlbumListViewController: UIViewController {
         albumTableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant: 10.0).isActive = true
         albumTableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0).isActive = true
         albumTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        /*
-        `Launch View`
-        On launch, the user should see a UITableView showing one album per cell.
-         */
+        loadingIndicator.style = .large
+        //loadingIndicator.hidesWhenStopped = true
+        //loadingIndicator.isHidden = false
+        view.addSubview(loadingIndicator)
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        loadingIndicator.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadingIndicator.startAnimating()
+    }
+    
+    func setAlbumList() {
+        
     }
 }
 
 // MARK: Table View Data Source
 extension AlbumListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albumList?.count ?? 1
+        return albumList?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,10 +72,21 @@ extension AlbumListViewController: UITableViewDataSource {
             defaultCell.textLabel?.text = String("text \(indexPath.row)")
             return defaultCell
         }
-        //cell.albumName?.text = albumList?[indexPath.row].albumTitle
-        //cell.artistName?.text = albumList?[indexPath.row].artist
+        
+        guard let album = albumList?[indexPath.row] else { return cell }
+        cell.albumName?.text = album.name
+        cell.artistName?.text = album.artistName
+        if let url = URL(string: album.albumArt ?? "") {
+            do {
+                let data = try Data(contentsOf: url)
+                cell.albumThumbnail?.image = UIImage(data: data)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
         return cell
     }
+    
 }
 
 // MARK: Table View Delegate
