@@ -12,6 +12,6 @@ import UIKit
 extension String {
     func addSuffix(_ suffix: String) -> String {
         if self.hasSuffix(suffix) { return self }
-        return "\(self)\(suffix)"
+        return "\(self) \(suffix)"
     }
 }

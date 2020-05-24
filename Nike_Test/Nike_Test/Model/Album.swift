@@ -15,6 +15,7 @@ struct Album: Decodable {
     let genres: [Genre]?
     let releaseDate: String?
     let copyright: String?
+    let iTunesURL: String?
     
     private enum CodingKeys: String, CodingKey {
         case name
@@ -23,6 +24,7 @@ struct Album: Decodable {
         case genres
         case releaseDate
         case copyright
+        case iTunesURL = "url"
     }
 }
 

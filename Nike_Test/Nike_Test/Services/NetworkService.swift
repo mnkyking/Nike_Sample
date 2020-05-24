@@ -11,14 +11,14 @@ import Foundation
 struct NetworkService {
     
     var baseURL: String { return "https://rss.itunes.apple.com/api/v1/us/apple-music/" }
-    // TODO: Add filtering with below properties
+    // TODO: - Add filtering with below properties
     var feedType: String { return "top-albums" }
     var genre: String { return "all" }
     var resultsLimit: String { return "100" }
     var allowExplicit: String { return "explicit" }
     var format: String { return "json" }
     
-    // TODO: Possibly add error handling when cannot retrieve data or properly decode data
+    // TODO: - Add error handling when cannot retrieve data or properly decode data
     func requestAlbumList(albumList: @escaping ([Album])->()) {
         let session = URLSession.shared
         let url = URL(string: "\(baseURL)\(feedType)/\(genre)/\(resultsLimit)/\(allowExplicit).\(format)")!
@@ -36,6 +36,8 @@ struct NetworkService {
                 formatter.dateFormat = "yyyy-MM-dd"
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(formatter)
+                let feed = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                print(feed ?? "feed not found")
                 let json = try decoder.decode(RSSFeed.self, from: data)
                 if let albums = json.feed?.results { albumList(albums) }
             } catch {

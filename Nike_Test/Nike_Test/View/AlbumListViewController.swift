@@ -36,12 +36,14 @@ class AlbumListViewController: UIViewController {
         albumTableView.isHidden = true
         albumTableView.backgroundColor = .white
         albumTableView.register(AlbumListTableViewCell.self, forCellReuseIdentifier: albumCellId)
+        
         albumTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(albumTableView)
-        albumTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
-        albumTableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant: 10.0).isActive = true
-        albumTableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0).isActive = true
-        albumTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        let layoutMargins = view.layoutMarginsGuide
+        albumTableView.topAnchor.constraint(equalTo: layoutMargins.topAnchor).isActive = true
+        albumTableView.leadingAnchor.constraint(equalTo: layoutMargins.leadingAnchor).isActive = true
+        albumTableView.trailingAnchor.constraint(equalTo: layoutMargins.trailingAnchor).isActive = true
+        albumTableView.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor).isActive = true
         
         loadingIndicator.style = .large
         view.addSubview(loadingIndicator)
@@ -64,8 +66,6 @@ extension AlbumListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: albumCellId, for: indexPath) as? AlbumListTableViewCell else {
             let defaultCell = tableView.dequeueReusableCell(withIdentifier: albumCellId, for: indexPath)
-            defaultCell.backgroundColor = .white
-            defaultCell.textLabel?.text = String("text \(indexPath.row)")
             return defaultCell
         }
         
