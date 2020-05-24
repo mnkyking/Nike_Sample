@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00772A8F247AF08F00A0F3CC /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00772A8E247AF08F00A0F3CC /* DetailsViewController.swift */; };
 		00E3E5942474BAED000578A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5932474BAED000578A4 /* AppDelegate.swift */; };
 		00E3E5962474BAED000578A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E3E5952474BAED000578A4 /* SceneDelegate.swift */; };
 		00E3E59D2474BAEE000578A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00E3E59C2474BAEE000578A4 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00772A8E247AF08F00A0F3CC /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		00E3E5902474BAED000578A4 /* Nike_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nike_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E3E5932474BAED000578A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00E3E5952474BAED000578A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				00E3E5932474BAED000578A4 /* AppDelegate.swift */,
 				00E3E5C32474BE47000578A4 /* AlbumListViewController.swift */,
 				00E3E5CD2475DF10000578A4 /* AlbumListTableViewCell.swift */,
+				00772A8E247AF08F00A0F3CC /* DetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			files = (
 				00E3E5942474BAED000578A4 /* AppDelegate.swift in Sources */,
 				00E3E5C42474BE47000578A4 /* AlbumListViewController.swift in Sources */,
+				00772A8F247AF08F00A0F3CC /* DetailsViewController.swift in Sources */,
 				00E3E5962474BAED000578A4 /* SceneDelegate.swift in Sources */,
 				00E3E5CC2474F027000578A4 /* Album.swift in Sources */,
 				00F0482B2479C28C000D60FA /* AlbumListLabel.swift in Sources */,
@@ -497,6 +501,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EZMGGP484A;
 				INFOPLIST_FILE = Nike_Test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,6 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EZMGGP484A;
 				INFOPLIST_FILE = Nike_Test/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

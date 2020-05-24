@@ -34,11 +34,10 @@ class AlbumListTableViewCell: UITableViewCell {
     
     // MARK: UI
     func setupUI() {
-        albumName = AlbumListLabel()
+        albumName = AlbumListLabel(fontSize: 16.0)
         artistName = AlbumListLabel()
         albumThumbnail = UIImageView()
         if let albumName = albumName, let artistName = artistName, let albumThumbnail = albumThumbnail {
-            albumThumbnail.backgroundColor = .orange
             contentView.addSubview(albumName)
             contentView.addSubview(artistName)
             contentView.addSubview(albumThumbnail)

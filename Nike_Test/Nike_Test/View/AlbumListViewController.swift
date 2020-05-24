@@ -42,9 +42,8 @@ class AlbumListViewController: UIViewController {
         albumTableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant: 10.0).isActive = true
         albumTableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0).isActive = true
         albumTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
         loadingIndicator.style = .large
-        //loadingIndicator.hidesWhenStopped = true
-        //loadingIndicator.isHidden = false
         view.addSubview(loadingIndicator)
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.widthAnchor.constraint(equalToConstant: 100).isActive = true
@@ -54,9 +53,6 @@ class AlbumListViewController: UIViewController {
         loadingIndicator.startAnimating()
     }
     
-    func setAlbumList() {
-        
-    }
 }
 
 // MARK: Table View Data Source
@@ -76,6 +72,7 @@ extension AlbumListViewController: UITableViewDataSource {
         guard let album = albumList?[indexPath.row] else { return cell }
         cell.albumName?.text = album.name
         cell.artistName?.text = album.artistName
+        // TODO: possibly add number to the left side to indicate value in Top 100
         if let url = URL(string: album.albumArt ?? "") {
             do {
                 let data = try Data(contentsOf: url)
@@ -95,6 +92,9 @@ extension AlbumListViewController: UITableViewDelegate {
         /*
          Tapping on a cell should `push` another view controller onto the `navigation stack`
          */
-        print("selected cell at \(indexPath.row)")
+        guard let album = albumList?[indexPath.row] else { return }
+        let detailsViewController = DetailsViewController()
+        detailsViewController.album = album
+        self.navigationController?.present(detailsViewController, animated: true, completion: nil)
     }
 }

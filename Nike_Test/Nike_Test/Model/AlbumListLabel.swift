@@ -10,10 +10,10 @@ import UIKit
 
 class AlbumListLabel: UILabel {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.font = UIFont(name: "Georgia", size: 14.0)
-        self.textColor = .black
+    init(fontSize: CGFloat = 14.0, color: UIColor = .black) {
+        super.init(frame: CGRect.zero)
+        self.font = UIFont(name: "Georgia", size: fontSize)
+        self.textColor = color
         self.adjustsFontSizeToFitWidth = true
         self.minimumScaleFactor = 0.5
     }

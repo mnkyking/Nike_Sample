@@ -10,15 +10,18 @@ import Foundation
 
 struct NetworkService {
     
+    var baseURL: String { return "https://rss.itunes.apple.com/api/v1/us/apple-music/" }
+    // TODO: Add filtering with below properties
+    var feedType: String { return "top-albums" }
+    var genre: String { return "all" }
+    var resultsLimit: String { return "100" }
+    var allowExplicit: String { return "explicit" }
+    var format: String { return "json" }
+    
+    // TODO: Possibly add error handling when cannot retrieve data or properly decode data
     func requestAlbumList(albumList: @escaping ([Album])->()) {
         let session = URLSession.shared
-        //let url = URL(string: "https://learnappmaking.com/ex/users.json")!
-        let feedType: String = "top-albums"
-        let genre: String = "all"
-        let resultsLimit: String = "100"
-        let allowExplicit: String = true ? "explicit" : "non-explicit"
-        let format: String = "json"
-        let url = URL(string: "https://rss.itunes.apple.com/api/v1/us/apple-music/\(feedType)/\(genre)/\(resultsLimit)/\(allowExplicit).\(format)")!
+        let url = URL(string: "\(baseURL)\(feedType)/\(genre)/\(resultsLimit)/\(allowExplicit).\(format)")!
         
         let task = session.dataTask(with: url, completionHandler: { data, response, error in
             if error != nil {
@@ -34,11 +37,7 @@ struct NetworkService {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(formatter)
                 let json = try decoder.decode(RSSFeed.self, from: data)
-                if let albums = json.feed?.results {
-                    print(albums)
-                    albumList(albums)
-                }
-                
+                if let albums = json.feed?.results { albumList(albums) }
             } catch {
                 print("JSON error: \(error.localizedDescription)")
             }
