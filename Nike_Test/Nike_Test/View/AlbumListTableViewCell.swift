@@ -7,9 +7,7 @@
 //
 
 import UIKit
-/*
-Each cell should display the name of the album, the artist, and the album art (thumbnail image).
-*/
+
 class AlbumListTableViewCell: UITableViewCell {
     var albumName: AlbumListLabel?
     var artistName: AlbumListLabel?
@@ -32,35 +30,36 @@ class AlbumListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    // MARK: UI
+    // MARK: Setup UI
     func setupUI() {
         albumName = AlbumListLabel(fontSize: 16.0)
         artistName = AlbumListLabel()
         albumThumbnail = UIImageView()
         if let albumName = albumName, let artistName = artistName, let albumThumbnail = albumThumbnail {
+            self.backgroundColor = .white
+            self.selectionStyle = .none
             contentView.addSubview(albumName)
             contentView.addSubview(artistName)
             contentView.addSubview(albumThumbnail)
             
             //albumThumbnail constraints
             albumThumbnail.translatesAutoresizingMaskIntoConstraints = false
-            albumThumbnail.widthAnchor.constraint(equalToConstant: 50.0).isActive = true
             albumThumbnail.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+            albumThumbnail.widthAnchor.constraint(equalTo: albumThumbnail.heightAnchor).isActive = true
             albumThumbnail.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10.0).isActive = true
             albumThumbnail.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0).isActive = true
-            albumThumbnail.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10.0).isActive = true
+            //albumThumbnail.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10.0).isActive = true
             //albumName constraints
             albumName.translatesAutoresizingMaskIntoConstraints = false
-            albumName.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
             albumName.leadingAnchor.constraint(equalTo: albumThumbnail.trailingAnchor, constant: 10.0).isActive = true
             albumName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10.0).isActive = true
             albumName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0).isActive = true
             //artistName constraints
             artistName.translatesAutoresizingMaskIntoConstraints = false
-            artistName.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
             artistName.leadingAnchor.constraint(equalTo: albumThumbnail.trailingAnchor, constant: 10.0).isActive = true
             artistName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10.0).isActive = true
             artistName.topAnchor.constraint(equalTo: albumName.bottomAnchor, constant: 10.0).isActive = true
+            artistName.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10.0).isActive = true
         }
     }
 

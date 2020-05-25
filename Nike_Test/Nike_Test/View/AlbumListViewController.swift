@@ -22,6 +22,7 @@ class AlbumListViewController: UIViewController {
         networkService.requestAlbumList { list in
             self.albumList = list
             DispatchQueue.main.async {
+                self.navigationController?.navigationBar.topItem?.title = networkService.feedType.uppercased()
                 self.albumTableView.isHidden = false
                 self.albumTableView.reloadData()
                 self.loadingIndicator.stopAnimating()
@@ -46,6 +47,7 @@ class AlbumListViewController: UIViewController {
         albumTableView.bottomAnchor.constraint(equalTo: layoutMargins.bottomAnchor).isActive = true
         
         loadingIndicator.style = .large
+        loadingIndicator.color = .darkGray
         view.addSubview(loadingIndicator)
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.widthAnchor.constraint(equalToConstant: 100).isActive = true
@@ -70,6 +72,7 @@ extension AlbumListViewController: UITableViewDataSource {
         }
         
         guard let album = albumList?[indexPath.row] else { return cell }
+        print("index: \(indexPath.row) album: \(album.name)")
         cell.albumName?.text = album.name
         cell.artistName?.text = album.artistName
         // TODO: possibly add number to the left side to indicate value in Top 100

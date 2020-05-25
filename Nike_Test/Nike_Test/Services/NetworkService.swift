@@ -32,12 +32,7 @@ struct NetworkService {
             guard let data = data else { return }
 
             do {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
                 let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .formatted(formatter)
-                let feed = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                print(feed ?? "feed not found")
                 let json = try decoder.decode(RSSFeed.self, from: data)
                 if let albums = json.feed?.results { albumList(albums) }
             } catch {

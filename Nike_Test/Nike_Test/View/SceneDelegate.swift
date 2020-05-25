@@ -14,7 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        //window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         let navigationController = UINavigationController()
@@ -22,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.viewControllers = [albumListViewController]
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
     }
 }
 
