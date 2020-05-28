@@ -8,9 +8,27 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
 
-    var album: Album?
+    let albumView = UIView()
+    let albumArt = UIImageView()
+    let albumName = AlbumListLabel(fontSize: 20.0)
+    let artistName = AlbumListLabel(fontSize: 16.0)
+    let genre = AlbumListLabel()
+    let releaseDate = AlbumListLabel()
+    let copyright = AlbumListLabel(fontSize: 10.0)
+    let iTunesButton = UIButton()
+    
+    let viewModel: AlbumDetailsViewModel
+    
+    init(viewModel: AlbumDetailsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,16 +36,7 @@ class DetailsViewController: UIViewController {
         setupUI()
     }
     
-    func setupUI() {
-        let albumView = UIView()
-        let albumArt = UIImageView()
-        let albumName = AlbumListLabel(fontSize: 20.0)
-        let artistName = AlbumListLabel(fontSize: 16.0)
-        let genre = AlbumListLabel()
-        let releaseDate = AlbumListLabel()
-        let copyright = AlbumListLabel(fontSize: 10.0)
-        let iTunesButton = UIButton()
-        
+    private func setupUI() {
         view.addSubview(albumView)
         albumView.addSubview(albumArt)
         view.addSubview(albumName)
@@ -41,7 +50,6 @@ class DetailsViewController: UIViewController {
         albumName.numberOfLines = 0
         iTunesButton.setTitleColor(.systemBlue, for: .normal)
         iTunesButton.addTarget(self, action:#selector(self.iTunesPressed), for: .touchUpInside)
-        releaseDate.text = "Released"
         
         let layoutMargins = view.layoutMarginsGuide
         //albumView constraints
@@ -90,27 +98,15 @@ class DetailsViewController: UIViewController {
         iTunesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         iTunesButton.setTitle("View on iTunes", for: .normal)
         
-        //
-        guard let album = album else { return }
-        if let url = URL(string: album.albumArt ?? "") {
-            do {
-                let data = try Data(contentsOf: url)
-                albumArt.image = UIImage(data: data)
-            } catch {
-                print(error.localizedDescription)
-            }
+        viewModel.albumImage { [weak self] (data) in
+            guard let self = self else { return }
+            self.albumArt.set(data: data)
         }
-        albumName.text = album.name
-        artistName.text = album.artistName
-        if let genres = album.genres {
-            for i in 0..<genres.count {
-                guard let name = genres[i].name else { continue }
-                guard let text = genre.text else { genre.text = name; continue}
-                genre.text = text.addSuffix(name, separator: ", ")
-            }
-        }
-        releaseDate.text = releaseDate.text?.addSuffix(album.releaseDate ?? "")
-        copyright.text = album.copyright
+        albumName.text = viewModel.name
+        artistName.text = viewModel.artistName
+        genre.text = viewModel.genres
+        releaseDate.text = viewModel.releaseDate
+        copyright.text = viewModel.copyright
     }
 
 }
@@ -118,7 +114,8 @@ class DetailsViewController: UIViewController {
 // MARK: - iTunes Button Action
 extension DetailsViewController {
     @objc func iTunesPressed(sender: UIButton!) {
-        guard let urlString = album?.iTunesURL, let url = URL(string:urlString)  else { return }
+        guard let url = viewModel.iTunesURL else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
+    
 }

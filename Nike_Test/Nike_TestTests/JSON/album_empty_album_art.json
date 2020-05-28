@@ -1,0 +1,21 @@
+{
+    "artistName": "artist name",
+    "id": "01_25_1964",
+    "releaseDate": "1964-25-01",
+    "name": "album name",
+    "kind": "album",
+    "copyright": "copyright",
+    "artistId": "01_25_1964",
+    "contentAdvisoryRating": "Explicit",
+    "artistUrl": "a url",
+    "artworkUrl100": null,
+    "genres": [
+        {
+            "genreId": "1",
+            "name": "Rock",
+            "url": "a url"
+        }
+    ],
+    "url": "https://aurl.com"
+}
+

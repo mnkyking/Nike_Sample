@@ -10,22 +10,30 @@ import XCTest
 @testable import Nike_Test
 
 class AlbumListLabelTests: XCTestCase {
+    
+    let defaultColor = UIColor.black
+    let defaultFont = UIFont(name: "Georgia", size: 14.0)
 
-    func testAlbumListLabelInit() {
+    func testMakeDefaultAlbumListLabel() {
         let listLabel = AlbumListLabel()
-        let defaultFont = UIFont(name: "Georgia", size: 14.0)
-        let defaultColor = UIColor.black
         XCTAssertEqual(listLabel.font, defaultFont)
         XCTAssertEqual(listLabel.textColor, defaultColor)
-        
-        let font = UIFont(name: "Georgia", size: 20.0)!
+    }
+    
+    func testMakeAlbumListLabelWithSize() {
+        guard let font = UIFont(name: "Georgia", size: 20.0) else {
+            fatalError()
+        }
         let listLabelFontChanged = AlbumListLabel(fontSize: font.pointSize)
         XCTAssertEqual(listLabelFontChanged.font, font)
         XCTAssertEqual(listLabelFontChanged.textColor, defaultColor)
-        
+    }
+    
+    func testMakeAlbumListLabelWithColor() {
         let color = UIColor.purple
         let listLabelColorChanged = AlbumListLabel(color: color)
         XCTAssertEqual(listLabelColorChanged.font, defaultFont)
         XCTAssertEqual(listLabelColorChanged.textColor, color)
     }
+    
 }

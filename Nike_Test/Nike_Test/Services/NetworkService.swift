@@ -8,37 +8,34 @@
 
 import Foundation
 
-struct NetworkService {
+class NetworkService {
     
-    var baseURL: String { return "https://rss.itunes.apple.com/api/v1/us/apple-music/" }
-    // TODO: - Add filtering with below properties
-    var feedType: String { return "top-albums" }
-    var genre: String { return "all" }
-    var resultsLimit: String { return "100" }
-    var allowExplicit: String { return "explicit" }
-    var format: String { return "json" }
+    private let session: URLSession
+    private let decoder: JSONDecoder
     
-    // TODO: - Add error handling when cannot retrieve data or properly decode data
-    func requestAlbumList(albumList: @escaping ([Album])->()) {
-        let session = URLSession.shared
-        let url = URL(string: "\(baseURL)\(feedType)/\(genre)/\(resultsLimit)/\(allowExplicit).\(format)")!
-        
-        let task = session.dataTask(with: url, completionHandler: { data, response, error in
+    init(_ urlSession: URLSession = URLSession.basic,
+         _ decoder: JSONDecoder = JSONDecoder()) {
+        self.session = urlSession
+        self.decoder = decoder
+    }
+    
+    func request<Model: Decodable>(url: URL, completion: @escaping (Model?)->Void) {
+        let task = session.dataTask(with: url) { (data, response, error) in
+            var decoded: Model?
+            defer { completion(decoded) }
             if error != nil {
-                print("Client error!")
                 return
             }
-            
-            guard let data = data else { return }
-
+            guard let data = data else {
+                return
+            }
             do {
-                let decoder = JSONDecoder()
-                let json = try decoder.decode(RSSFeed.self, from: data)
-                if let albums = json.feed?.results { albumList(albums) }
+                decoded = try self.decoder.decode(Model.self, from: data)
             } catch {
                 print("JSON error: \(error.localizedDescription)")
             }
-        })
+        }
         task.resume()
     }
+    
 }

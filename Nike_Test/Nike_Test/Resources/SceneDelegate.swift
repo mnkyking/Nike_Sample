@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         let navigationController = UINavigationController()
-        let albumListViewController = AlbumListViewController()
+        let viewModel = AlbumsViewModelFactory.makeListViewModel()
+        let albumListViewController = AlbumListViewController(viewModel: viewModel)
         navigationController.viewControllers = [albumListViewController]
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
