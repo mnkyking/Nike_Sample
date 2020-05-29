@@ -43,12 +43,13 @@ extension AlbumListViewController: UITableViewDataSource {
 // MARK: Table View Delegate
 extension AlbumListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-         Tapping on a cell should `push` another view controller onto the `navigation stack`
-         */
+        //Tapping on a cell should `push` another view controller onto the `navigation stack`
         guard let detailsViewModel = viewModel.detailViewModel(for: indexPath.row) else { return }
         let detailsViewController = DetailsViewController(viewModel: detailsViewModel)
-        self.navigationController?.present(detailsViewController, animated: true, completion: nil)
+        let backButton = UIBarButtonItem(title: AlbumsService.Constants.feedType.uppercased(), style: .plain, target: nil, action: nil)
+        backButton.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "Arial-BoldMT", size: 16.0)!], for: .normal)
+        navigationItem.backBarButtonItem = backButton
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
     }
     
 }

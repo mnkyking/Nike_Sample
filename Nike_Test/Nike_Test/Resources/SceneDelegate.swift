@@ -17,6 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         let navigationController = UINavigationController()
+        navigationController.navigationBar.tintColor = .white
+        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Arial-BoldMT", size: 16.0)!]
         let viewModel = AlbumsViewModelFactory.makeListViewModel()
         let albumListViewController = AlbumListViewController(viewModel: viewModel)
         navigationController.viewControllers = [albumListViewController]
